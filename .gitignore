@@ -1,5 +1,5 @@
 # Config Files
-/config/env_development.ini
+/config/env.ini
 /config/env_production.ini
 /config/env_testing.ini
 

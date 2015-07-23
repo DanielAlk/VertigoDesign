@@ -7,7 +7,6 @@
 
 <body>
 	<?php include 'layouts/_nav.php'; ?>
-	<a href="<?php echo $path->notification__new_sale(); ?>">linkkk</a>
 	<?php include $app->view; ?>
 	<?php include 'layouts/_footer.php'; ?>
 	<script src="<?php $asset->js(); ?>" type="application/javascript"></script>
