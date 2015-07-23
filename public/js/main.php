@@ -2,8 +2,7 @@
 use MatthiasMullie\Minify;
 $config = parse_ini_file('../../config/env.ini', true);
 $settings = parse_ini_file('../../config/app.ini', true);
-$env = $config['environment'];
-$minify_active = $config[$env]['minify_assets'];
+$minify_active = $config['minify_assets'];
 if ($minify_active) ob_start();
 $cache_control = $settings['cache-control']['js'];
 header('Cache-Control: '.$cache_control);
