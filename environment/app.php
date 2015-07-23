@@ -91,3 +91,4 @@ class App {
  * and sets its value as a cache control header in the global $page_headers array
  * if key is not found in the array, @param will be trated as a valid value for a cache-control header
  */
+?>

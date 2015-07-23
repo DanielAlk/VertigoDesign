@@ -4,5 +4,5 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="google-site-verification" content="6IM8lSoVCSNyAMjuWi_51GEKeL4tAn6BZF9F-5iuFhE" />
-<title><?php echo isset($head_title) ? $head_title : l('main', 'title'); ?></title>
+<title><?php l('main.title'); ?></title>
 <link href="<?php $asset->path('favicon.ico'); ?>" rel="icon" type="image/x-icon">

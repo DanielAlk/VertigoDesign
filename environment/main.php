@@ -64,7 +64,7 @@ class Environment {
 	private function not_found() {
 		header("HTTP/1.0 404 Not Found");
 		$GLOBALS['app'] = new StdClass;
-		$GLOBALS['app']->layout = '/views/layouts/not_found.php';
+		$GLOBALS['app']->layout = 'views/layouts/not_found.php';
 		return false;
 	}
 	

@@ -10,11 +10,19 @@ class Locale {
 
 		$this->l = parse_ini_file('../config/locales/'.$this->language.'.ini', true);
 
-		function l($a, $b, $c = false) {
+		function _l($str) {
 			global $locale;
-			if ($c !== false && isset($locale->l[$a][$b][$c])) print $locale->l[$a][$b][$c];
-			else if (isset($locale->l[$a][$b])) print $locale->l[$a][$b];
-		}
+			$keys = explode('.', $str);
+			foreach ($keys as $i => $k) {
+				if (!$i) $r = $locale->l[$k];
+				else $r = $r[$k];
+			}
+			return $r;
+		};
+
+		function l($str) {
+			echo _l($str);
+		};
 	}
 }
 ?>

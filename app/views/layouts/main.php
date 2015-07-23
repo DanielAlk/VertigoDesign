@@ -7,6 +7,7 @@
 
 <body>
 	<?php include 'layouts/_nav.php'; ?>
+	<a href="notify/">linkkk</a>
 	<?php include $app->view; ?>
 	<?php include 'layouts/_footer.php'; ?>
 	<script src="<?php $asset->js(); ?>" type="application/javascript"></script>
