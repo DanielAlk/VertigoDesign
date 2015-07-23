@@ -1,0 +1,1 @@
+<strong>Nombre: </strong><?php echo $name; ?>
