@@ -42,12 +42,12 @@ class App {
 	}
 
 	# TODO: Review all this logic, add support for messages in redirects (using session ?)
-	private $redirect = false;
-	protected function redirect($param = false) { $this->redirect = $param; }
+	private $redirect_path = false;
+	protected function redirect($param = false) { $this->redirect_path = $param; }
 	public function buffer() {
 		$ob_status = ob_get_status();
 		if ($ob_status['type']) ob_end_flush();
-		if ($this->redirect) header('Location: '.$this->redirect);
+		if ($this->redirect_path) header('Location: '.$this->redirect_path);
 	}
 	####################################################################################
 	

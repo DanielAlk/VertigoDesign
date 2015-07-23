@@ -7,19 +7,19 @@ class notification_controller extends ApplicationController {
 
 	protected function user_info() {
 		global $mailer;
-		$GLOBALS['name'] = 'dani';
+		$GLOBALS['name'] = 'Juan';
 
 		$mailer->mail(array('daniognr@hotmail.com', 'Dani Alk'), 'hola!');
 	}
 
 	protected function new_sale() {
 		global $mailer;
-		$GLOBALS['name'] = 'dani';
+		$GLOBALS['name'] = 'Juan';
 
 		$mailer->notify('NEW SALE', function($status) {
 			global $path;
 			if ($status) $this->redirect($path->home());
-			else return 'error';
+			else return $status;
 		});
 	}
 

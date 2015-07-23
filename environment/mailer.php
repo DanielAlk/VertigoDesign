@@ -11,6 +11,13 @@ class Mailer {
 		$this->mailer = new PHPMailer();
 
 		$this->mailer->isSMTP(); // Set mailer to use SMTP
+		$this->mailer->SMTPOptions = array(
+			'ssl' => array(
+				'verify_peer' => false,
+				'verify_peer_name' => false,
+				'allow_self_signed' => true
+				)
+			);
 		$this->mailer->Host = $settings['host']; // Specify main and backup SMTP servers
 		$this->mailer->SMTPAuth = true; // Enable SMTP authentication
 		$this->mailer->Username = $settings['username']; // SMTP username

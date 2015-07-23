@@ -1,10 +1,11 @@
 <?php
 class Path {
 
+	private $routes;
+
 	# TODO: make this function recognize more than one pattern defined in routes.ini
 	public function __construct() {
-		$routes = parse_ini_file('../config/routes.ini');
-		foreach ($routes as $key => $value) $this->$key = $value;
+		$this->routes = $routes = parse_ini_file('../config/routes.ini');
 		$path = $_GET['path'];
 		unset($_GET['path']);
 		$params = array();
@@ -55,13 +56,14 @@ class Path {
 	public function __call($name, $args) {
 		$absolute_path = $name[0] == '_';
 		if ($absolute_path) $name = substr($name, 1);
+		if (strpos($name, '_')) $name = str_replace('__', '#', $name);
 		if (isset($args) && isset($args[0])) {
 			if (is_object($args[0]) || is_array($args[0])) $arr = (array)$args[0];
 			else if (is_string($args[0])) $arr = $args[0];
 		}
 		
-		if (isset($this->$name)) {
-			$route = $this->$name;
+		if (isset($this->routes[$name])) {
+			$route = $this->routes[$name];
 			if (isset($arr) && is_array($arr)) {
 				//SI EN LA URL DEFINIDA FIGURA ALGO TIPO: {id} , ESO SERA REEMPLAZADO POR $arr['id'];
 				if (preg_match_all('/{\w+}/', $route, $results)) {
@@ -85,8 +87,8 @@ class Path {
 				else $route.='?'.http_build_query($arr);
 			}
 		}
-		else if(strpos($name, '_')) {
-			list($controller, $action) = explode('__', $name);
+		else if(strpos($name, '#')) {
+			list($controller, $action) = explode('#', $name);
 			$route = $controller.'/'.$action.'/';
 		}
 		else {
@@ -94,7 +96,7 @@ class Path {
 		}
 
 		if (isset($arr)) {
-			if (!isset($this->$name) && is_array($arr)) $route.='?'.http_build_query($arr);
+			if (!isset($this->routes[$name]) && is_array($arr)) $route.='?'.http_build_query($arr);
 			else if (is_string($arr)) $route.=$arr;
 		}
 
