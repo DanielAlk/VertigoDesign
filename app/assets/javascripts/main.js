@@ -376,6 +376,7 @@ VD.image_gallery = function(url) {
 			this.window_left = this.$thumbnails_window.offset().left;
 			this.thumb_width = this.$images.length > 1 ? this.$images.eq(1).offset().left - this.$images.eq(0).offset().left : this.$images.first().width();
 			this.scroll_width = this.$thumbnails_window.get(0).scrollWidth - this.window_width;
+			VD.image_gallery.data = this;
 			return this;
 		};
 
@@ -395,6 +396,7 @@ VD.image_gallery = function(url) {
 
 		VD.image_gallery.active_thumb_center = function() {
 			var data = VD.image_gallery.data;
+			if (!data.scroll_width) return;
 			var $active = data.$images.filter('.active');
 			var $body = data.$thumbnails_body;
 			var $thumbs = data.$images;
@@ -440,7 +442,7 @@ VD.image_gallery = function(url) {
 	$.get(url, function(gallery) {
 		$('body').addClass('gallery-open').append(gallery);
 
-		var data = VD.image_gallery.data = new VD.image_gallery.dataConstructor();
+		var data = new VD.image_gallery.dataConstructor();
 		
 		$(document).keydown(VD.image_gallery.keydown);
 
