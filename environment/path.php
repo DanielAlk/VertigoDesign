@@ -60,5 +60,54 @@ class Path {
 		}
 	}
 
+
+	public function __call($name, $args) {
+		$absolute_path = $name[0] == '_';
+		if ($absolute_path) $name = substr($name, 1);
+		if (isset($args) && isset($args[0])) {
+			if (is_object($args[0]) || is_array($args[0])) $arr = (array)$args[0];
+			else if (is_string($args[0])) $arr = $args[0];
+		}
+		
+		if (isset($this->paths[$name])) {
+			$route = $this->paths[$name]['route'];
+			if (isset($arr) && is_array($arr)) {
+				//SI EN LA URL DEFINIDA FIGURA ALGO TIPO: {id} , ESO SERA REEMPLAZADO POR $arr['id'];
+				if (preg_match_all('/{\w+}/', $route, $results)) {
+					$prop_names = $props = array();
+					foreach($results as $result) foreach(preg_replace('/[{}]/', '', $result) as $p) $prop_names[] = $p;
+					foreach ($prop_names as $key => $prop_name) if (isset($arr[$prop_name])) {
+						$prop = $arr[$prop_name];
+						unset($arr[$prop_name]);
+						$props[] = $prop;
+					}
+					if (count($props)) {
+						$route = str_replace($prop_names, $props, $route);
+						$route = str_replace(array('{','}'), '', $route);
+					}
+					//SI PROPIEDADES DEL ARRAY NO FUERON REEMPLAZADAS SE CONVIERTEN A QUERY
+					if (count($arr)) {
+						$route.='?'.http_build_query($arr);
+					}
+				}
+				//SI EN LA URL NO HAY NADA QUE REEMPLAZAR EL ARRAY SE CONVIERTE A QUERY
+				else $route.='?'.http_build_query($arr);
+			}
+
+			if (isset($arr) && is_string($arr)) $route.=$arr;
+			
+			//CLEAN ROUTE IF PATTERN STILL THERE
+			$route = preg_replace('/{\w+}\//', '', $route);
+			//CLEAN ROUTE IF DOUBLE BAR FOUND
+			$route = preg_replace('/\/\//', '/', $route);
+
+			global $base_url, $host;
+
+			if ($absolute_path) return $host.$base_url.$route;
+			return $base_url.$route;
+		}
+		return '';
+	}
+
 }
 ?>
