@@ -60,7 +60,6 @@ class Path {
 		}
 	}
 
-
 	public function __call($name, $args) {
 		$absolute_path = $name[0] == '_';
 		if ($absolute_path) $name = substr($name, 1);
