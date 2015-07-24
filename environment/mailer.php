@@ -24,7 +24,6 @@ class Mailer {
 		$this->mailer->Password = $settings['password']; // SMTP password
 		$this->mailer->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
 		$this->mailer->Port = 25;
-
 		$this->mailer->CharSet = 'UTF-8';
 		$this->mailer->SetFrom($settings['from_email'], $settings['from_name']);
 	}
@@ -34,9 +33,10 @@ class Mailer {
 		$callback = $callback !== false ? $callback : function($status) { return json_encode($status); };
 		$this->mailer->AddAddress($to[0], $to[1]);
 		$this->mailer->Subject = isset($subject) ? $subject : 'Default Subject';
-		ob_start(function($buffer) use ($callback) {
-			$this->mailer->MsgHTML($buffer);
-			return $callback($this->mailer->Send(), $buffer);
+		$mailer = $this->mailer;
+		ob_start(function($buffer) use ($callback, $mailer) {
+			$mailer->MsgHTML($buffer);
+			return $callback($mailer->Send(), $buffer);
 		});
 	}
 
