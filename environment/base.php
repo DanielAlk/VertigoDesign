@@ -4,7 +4,6 @@ class ActiveBase {
 
 	public function __construct($data) {
 		if (!isset($data) || $data === false) return false;
-		$this->env = $GLOBALS['environment'];
 		$class_route = explode('\\', get_class($this));
 		$class_name = end($class_route);
 		if ($class_name == 'ActiveBase') return;

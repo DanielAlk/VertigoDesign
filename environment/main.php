@@ -5,10 +5,9 @@ class Environment {
 		$app_dir = get_include_path();
 		//READ CONFIGURATION AND SETTINGS
 		$settings = parse_ini_file('../config/env.ini', true);
-		$environment = $settings['environment'];
 		$database = $load_database ? $settings['database'] : false;
 		//SET GLOBALS
-		$GLOBALS['environment'] = $environment;
+		$GLOBALS['environment'] = $settings['environment'];
 		$GLOBALS['host'] = $settings['host'];
 		$GLOBALS['base_url'] = $settings['base_url'];
 		$GLOBALS['debug'] = $settings['debug'] === '1';
