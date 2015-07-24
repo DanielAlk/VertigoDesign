@@ -34,12 +34,15 @@ class Path {
 						if (preg_match('/{\w+}/', $route_subs[$i])) {
 							$param_name = str_replace(array('{','}'), '', $route_subs[$i]);
 							$params[$param_name] = $path_subs[$i];
+							var_dump($params); print '<br>';
 							$params = $this->params_from_key(array_search($route, $routes), $params);
+							var_dump($params); print '<br>';
 						}
 					}
 				}
 			}
 		}
+		var_dump($params); print '<br>'; die();
 		$this->create_path_methods();
 		$GLOBALS['params'] = $params;
 	}
