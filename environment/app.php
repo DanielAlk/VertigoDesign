@@ -14,6 +14,8 @@ class App {
 		if ($GLOBALS['debug']) $GLOBALS['log'] = json_encode($log);
 		//SET PAGE HEADERS, YOU CAN CHANGE IT OR ADD MORE HEADERS IN YOUR CONTROLLER
 		$this->cache_control('static');
+		//SET METHODS
+		$this->set_methods();
 		//CHECK IF ACTION EXISTS AND RUN
 		if (!method_exists($this, $this->action)) $this->not_found();
 		else $this->$params['action']($this->before_action_method());
@@ -41,9 +43,23 @@ class App {
 		return $is_empty ? null : $return;
 	}
 
+	private function set_methods() {
+		function redirect_to($param = false) {
+			$GLOBALS['app']->redirect_path = $param;
+		}
+		function render($echos = array(), $file) {
+			foreach($GLOBALS as $key => $value) {
+				$$key = $value;
+			}
+			foreach ($echos as $key => $value) {
+				$$key = $value;
+			}
+			include $file;
+		}
+	}
+
 	# TODO: Review all this logic, add support for messages in redirects (using session ?)
 	private $redirect_path = false;
-	protected function redirect($param = false) { $this->redirect_path = $param; }
 	public function buffer() {
 		$ob_status = ob_get_status();
 		if ($ob_status['type']) ob_end_flush();
