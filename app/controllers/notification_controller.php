@@ -18,7 +18,7 @@ class notification_controller extends ApplicationController {
 
 		$mailer->notify('NEW SALE', function($status) {
 			global $path;
-			if ($status) $this->redirect($path->home());
+			if ($status) redirect_to($path->home());
 			else return $status;
 		});
 	}

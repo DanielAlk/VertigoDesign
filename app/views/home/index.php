@@ -215,3 +215,8 @@
 		</section>
 	</div>
 </div>
+<?php 
+$extra_js = <<<EXTRA_JS
+	VD.home_init_page('$media');
+EXTRA_JS
+?>

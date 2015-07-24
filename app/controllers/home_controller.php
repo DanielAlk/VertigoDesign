@@ -26,7 +26,7 @@ class home_controller extends ApplicationController {
 
 		$GLOBALS['packaging_images'] = $this->images_data('packaging', 'png');
 
-		$GLOBALS['extra_js'] = "VD.home_init_page('$media');";
+		$GLOBALS['media'] = $media;
 	}
 
 	protected function images_data($dir, $type = 'jpg') {

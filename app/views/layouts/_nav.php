@@ -11,6 +11,6 @@
         <img alt="" src="<?php $asset->path('logo-main.png'); ?>">
       </a>
     </div>
-    <?php $html->render(array( 'id' => 'navbar-main' ), 'layouts/_nav_bar.php'); ?>
+    <?php render('layouts/_nav_bar.php', array( 'id' => 'navbar-main' )); ?>
   </nav>
 </header>

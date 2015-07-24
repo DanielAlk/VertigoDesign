@@ -1,6 +1,6 @@
 <footer class="container">
 	<div class="row-margin">
-		<?php $html->render(array( 'class' => 'navbar-footer' ), 'layouts/_nav_bar.php'); ?>
+		<?php render('layouts/_nav_bar.php', array( 'class' => 'navbar-footer' )); ?>
 		<div class="footer-body">
 			<mark>&copy; Vertigo Design Company</mark>
 		</div>
