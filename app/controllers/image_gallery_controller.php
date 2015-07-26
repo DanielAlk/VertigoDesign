@@ -1,9 +1,9 @@
 <?php
 class image_gallery_controller extends ApplicationController {
 	protected $before_actions = array(
-		array('validate_params'),
 		array('set_layout'),
-		array('set_cache')
+		array('set_cache'),
+		array('validate_params')
 		);
 
 	protected function index() {
@@ -33,7 +33,9 @@ class image_gallery_controller extends ApplicationController {
 
 	protected function validate_params() {
 		global $params;
-
+		if (!array_search($params['dir'], ['branding', 'mobile', 'packaging', 'print', 'web'])) {
+			$this->not_found();
+		}
 	}
 
 	protected function set_layout() {
