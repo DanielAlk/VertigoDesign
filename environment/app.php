@@ -7,8 +7,8 @@ class App {
 		$this->controller = $params['controller'].'_controller';
 		$this->action = $params['action'];
 		$this->layout = 'layouts/main.php';
-		$view_directory = str_replace('_controller', '', $this->controller);
-		$this->view = $view_directory.'/'.$this->action.'.php';
+		$this->views_directory = str_replace('_controller', '', $this->controller);
+		$this->view = $this->views_directory.'/'.$this->action.'.php';
 		$log = array('controller'=>$this->controller,'action'=>$this->action,'POST'=>$_POST,'GET'=>$_GET);
 		//SET LOG IN TESTING OR DEVELOPMENT ENVIRONMENTS
 		if ($GLOBALS['debug']) $GLOBALS['log'] = json_encode($log);
@@ -58,6 +58,11 @@ class App {
 			}
 		}
 		return $is_empty ? null : $return;
+	}
+
+
+	protected function render($view_name) {
+		$this->view = $this->views_directory.'/'.$view_name.'.php';
 	}
 	
 	protected function cache_control($type, $replace_existing_headers = false) {

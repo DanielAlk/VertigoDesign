@@ -14,11 +14,14 @@ class Asset {
 		print $this->assets[$ext][1].$str;
 	}
 	
-	public function get_folder($dir, $type = 'jpg', $filter = '') {
+	public function get_folder($dir, $type = 'jpg', $filter = '', $return_data = null) {
 		$rtn = array();
 		$path = $this->assets[$type][0].$dir.'/'.$filter.'*.'.$type;
 		foreach(glob($path) as $filename) {
-			$rtn[] = $this->assets[$type][1].str_replace($this->assets[$type][0], '', $filename);
+			$file_info = $this->assets[$type][1].str_replace($this->assets[$type][0], '', $filename);
+			$image_data = getimagesize($filename);
+			if ($return_data) $rtn[] = array( 'file' => $file_info, 'data' => $image_data );
+			else $rtn[] = $file_info;
 		}
 		return $rtn;
 	}

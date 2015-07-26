@@ -66,7 +66,7 @@
 				<h4 class="text-extra-light"><big>who</big> you are is what</h4>
 				<h2 class="text-bold uppercase">really matters.</h2>
 				<p class="text-helvetica light">Every project must have it´s own identity, his own view of the world. To achieve that goal Vertigo compromizes to create a visual system that matches who you are as a brand.</p>
-				<a href="<?php print $path->image_gallery(array('dir' => 'branding', 'filter' => '*')); ?>" class="icon plus-sign">+</a>
+				<a href="<?php print $path->image_gallery(array('dir' => 'branding')); ?>" class="icon plus-sign">+</a>
 			</div>
 			<ol class="slider-indicators">
 				<?php for ($i = 0; $i<count($branding_images); $i++): ?>
@@ -84,7 +84,7 @@
 				<h4 class="text-extra-light"><big>we</big> can take your ideas</h4>
 				<h2 class="text-bold uppercase">everywhere</h2>
 				<p class="text-helvetica light">We can help you create a better user experience, allowing your business to reach a bigger audience in a fun, more engaging way than ever before.</p>
-				<a href="<?php print $path->image_gallery(array('dir' => 'mobile', 'filter' => '*')); ?>" class="icon plus-sign">+</a>
+				<a href="<?php print $path->image_gallery(array('dir' => 'mobile')); ?>" class="icon plus-sign">+</a>
 			</div>
 		</div>
 		<section class="slider mobile col-sm-8 col-md-6 reset-bs-padding">
@@ -92,7 +92,7 @@
 				<a href="#" class="icon-circle-arrow slider-go-next"></a>
 				<div class="img-repo">
 					<?php foreach ($mobile_images as $i => $img): ?>
-						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery(array('dir' => 'mobile', 'filter' => $img['data'])); ?>">
+						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery_search(array('dir' => 'mobile', 'filter' => $img['data'])); ?>">
 					<?php endforeach; ?>
 				</div>
 			</div>
@@ -116,10 +116,10 @@
 			<div class="img-repo-border">
 				<div class="img-repo">
 					<?php foreach ($web_0_images as $i => $img): ?>
-						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery(array('dir' => 'web', 'filter' => $img['data'])); ?>">
+						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery_search(array('dir' => 'web', 'filter' => $img['data'])); ?>">
 					<?php endforeach; ?>
 				</div>
-				<a href="<?php print $path->image_gallery(array('dir' => 'web', 'filter' => '*')); ?>" class="icon plus-sign">+</a>
+				<a href="<?php print $path->image_gallery(array('dir' => 'web')); ?>" class="icon plus-sign">+</a>
 			</div>
 			<ol class="slider-indicators">
 				<?php for ($i = 0; $i<count($web_0_images); $i++): ?>
@@ -131,10 +131,10 @@
 			<div class="img-repo-border">
 				<div class="img-repo">
 					<?php foreach ($web_1_images as $i => $img): ?>
-						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery(array('dir' => 'web', 'filter' => $img['data'])); ?>">
+						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery_search(array('dir' => 'web', 'filter' => $img['data'])); ?>">
 					<?php endforeach; ?>
 				</div>
-				<a href="<?php print $path->image_gallery(array('dir' => 'web', 'filter' => '*')); ?>" class="icon plus-sign">+</a>
+				<a href="<?php print $path->image_gallery(array('dir' => 'web')); ?>" class="icon plus-sign">+</a>
 			</div>
 			<ol class="slider-indicators">
 				<?php for ($i = 0; $i<count($web_1_images); $i++): ?>
@@ -146,10 +146,10 @@
 			<div class="img-repo-border">
 				<div class="img-repo">
 					<?php foreach ($web_2_images as $i => $img): ?>
-						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery(array('dir' => 'web', 'filter' => $img['data'])); ?>">
+						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery_search(array('dir' => 'web', 'filter' => $img['data'])); ?>">
 					<?php endforeach; ?>
 				</div>
-				<a href="<?php print $path->image_gallery(array('dir' => 'web', 'filter' => '*')); ?>" class="icon plus-sign">+</a>
+				<a href="<?php print $path->image_gallery(array('dir' => 'web')); ?>" class="icon plus-sign">+</a>
 			</div>
 			<ol class="slider-indicators">
 				<?php for ($i = 0; $i<count($web_2_images); $i++): ?>
@@ -161,10 +161,10 @@
 			<div class="img-repo-border">
 				<div class="img-repo">
 					<?php foreach ($web_3_images as $i => $img): ?>
-						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery(array('dir' => 'web', 'filter' => $img['data'])); ?>">
+						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery_search(array('dir' => 'web', 'filter' => $img['data'])); ?>">
 					<?php endforeach; ?>
 				</div>
-				<a href="<?php print $path->image_gallery(array('dir' => 'web', 'filter' => '*')); ?>" class="icon plus-sign">+</a>
+				<a href="<?php print $path->image_gallery(array('dir' => 'web')); ?>" class="icon plus-sign">+</a>
 			</div>
 			<ol class="slider-indicators">
 				<?php for ($i = 0; $i<count($web_3_images); $i++): ?>
@@ -181,10 +181,10 @@
 			<div class="img-repo-border">
 				<div class="img-repo">
 					<?php foreach ($print_images as $i => $img): ?>
-						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery(array('dir' => 'print', 'filter' => $img['data'])); ?>">
+						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img['image']; ?>" data-gallery="<?php echo $path->image_gallery_search(array('dir' => 'print', 'filter' => $img['data'])); ?>">
 					<?php endforeach; ?>
 				</div>
-				<a href="<?php print $path->image_gallery(array('dir' => 'print', 'filter' => '*')); ?>" class="icon plus-sign">+</a>
+				<a href="<?php print $path->image_gallery(array('dir' => 'print')); ?>" class="icon plus-sign">+</a>
 			</div>
 			<ol class="slider-indicators">
 				<?php for ($i = 0; $i<count($print_images); $i++): ?>
@@ -205,7 +205,7 @@
 						<div data-gallery="<?php echo $path->image_gallery(array('dir' => 'packaging')); ?>"></div>
 					</div>
 				</div>
-				<a href="<?php print $path->image_gallery(array('dir' => 'packaging', 'filter' => '*')); ?>" class="icon plus-sign">+</a>
+				<a href="<?php print $path->image_gallery(array('dir' => 'packaging')); ?>" class="icon plus-sign">+</a>
 			</div>
 			<ol class="slider-indicators">
 				<?php for ($i = 0; $i<count($packaging_images); $i++): ?>

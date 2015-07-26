@@ -3,8 +3,7 @@ class Path {
 
 	private $routes;
 	private $paths;
-
-	# TODO: make this function recognize more than one pattern defined in routes.ini
+	
 	public function __construct() {
 		$this->routes = $routes = parse_ini_file('../config/routes.ini');
 		$path = $_GET['path'];
@@ -25,10 +24,7 @@ class Path {
 				if (count($path_subs) == count($route_subs)) {
 					for($i = 0; $i<count($clean_subs); $i++) {
 						if ($clean_subs[$i] == $path_subs[$i]) $is_match = true;
-						else if ($clean_subs[$i] != '') {
-							$is_match = false;
-							break;
-						}
+						else if ($clean_subs[$i] != '') break;
 					}
 					if ($is_match) {
 						for ($i = 0; $i<count($route_subs); $i++) {
