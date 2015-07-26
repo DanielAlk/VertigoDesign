@@ -14,7 +14,7 @@ class Asset {
 		print $this->assets[$ext][1].$str;
 	}
 	
-	public function get_all_from_dir($dir, $type = 'jpg', $filter = '') {
+	public function get_folder($dir, $type = 'jpg', $filter = '') {
 		$rtn = array();
 		$path = $this->assets[$type][0].$dir.'/'.$filter.'*.'.$type;
 		foreach(glob($path) as $filename) {

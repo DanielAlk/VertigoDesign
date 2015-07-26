@@ -17,11 +17,12 @@ class image_gallery_controller extends ApplicationController {
 		global $asset;
 		$dir = '_galleries'.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR;
 		$rtn = array();
-		$rtn_full = $asset->get_all_from_dir($dir.'full', $type, $filter);
-		$rtn_thumb = $asset->get_all_from_dir($dir.'thumbnails', $type, $filter);
+		$rtn_full = $asset->get_folder($dir.'full', $type, $filter);
+		$rtn_thumb = $asset->get_folder($dir.'thumbnails', $type, $filter);
 		for ($i = 0; $i<count($rtn_full); $i++) {
 			$rtn[basename($rtn_full[$i])] = array("full" => $rtn_full[$i], "thumb" => $rtn_thumb[$i]);
 		}
+		die();
 		return $rtn;
 	}
 }

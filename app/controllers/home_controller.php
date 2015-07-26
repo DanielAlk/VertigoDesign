@@ -9,9 +9,9 @@ class home_controller extends ApplicationController {
 
 		$highlight_images_dir = 'highlight';
 		if ($media == 'mobile') $highlight_images_dir.='-mobile';
-		$GLOBALS['highlight_images'] = $asset->get_all_from_dir($highlight_images_dir);
+		$GLOBALS['highlight_images'] = $asset->get_folder($highlight_images_dir);
 
-		$GLOBALS['animation_images'] = $asset->get_all_from_dir('animation');
+		$GLOBALS['animation_images'] = $asset->get_folder('animation');
 
 		$GLOBALS['branding_images'] = $this->images_data('branding', 'png');
 
@@ -32,7 +32,7 @@ class home_controller extends ApplicationController {
 	protected function images_data($dir, $type = 'jpg') {
 		global $asset;
 		$rtn = array();
-		$images = $asset->get_all_from_dir($dir, $type);
+		$images = $asset->get_folder($dir, $type);
 		if (array_key_exists($dir, $this->gallery_data)) {
 			$data = $this->gallery_data[$dir];
 			for ($i = 0; $i<count($images); $i++) {
