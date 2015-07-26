@@ -428,6 +428,7 @@ VD.image_gallery = function(url) {
 			switch(e.which) {
 				case 39: VD.image_gallery.next(); break;
 				case 37: VD.image_gallery.prev(); break;
+				case 27: $('.image-gallery, .close-gallery').trigger('click'); break;
 			}
 		};
 

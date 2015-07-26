@@ -4,8 +4,8 @@ body.gallery-open { overflow: hidden; }
 .container.image-gallery a.close-gallery { position: absolute; display: inline-block; top: 0; right: 0; line-height: 17px; font-size: 30px; width: 25px; height: 25px; text-align: center; z-index: 1; background-color: rgba(0,0,0,0.5); }
 .container.image-gallery div.thumbnails { width: 100%; height: 59px; overflow: hidden; position: relative; }
 .container.image-gallery div.full-image { position: relative; width: 100%; height: 494px; margin-bottom: 10px; overflow-y: scroll; }
-.container.image-gallery div.thumbnails img { width: auto; height: 100%; }
-.container.image-gallery div.full-image img { width: 100%; height: auto; }
+.container.image-gallery div.thumbnails img { width: auto; height: 100%; max-width: 100%; }
+.container.image-gallery div.full-image img { width: auto; max-width: 100%; height: 100%; margin: 0 auto; display: block; }
 .container.image-gallery div.thumbnails .thumbnails-body { position: absolute; top: 0; left: 0; height: 59px; white-space: nowrap; }
 .container.image-gallery div.thumbnails .thumbnails-body>span { display:inline-block; height: 59px; width: 105px; text-align: center; cursor: pointer; }
 .container.image-gallery div.thumbnails .thumbnails-body>span.active { border: 1px solid rgba(255, 255, 255, 0.5); }
