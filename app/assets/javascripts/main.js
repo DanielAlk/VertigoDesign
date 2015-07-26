@@ -366,13 +366,15 @@ VD.image_gallery = function(url) {
 			this.$gallery = $('.image-gallery');
 			this.$images = this.$gallery.find('div.thumbnails span');
 			this.$first_image = this.$images.first();
-			this.$full_image = this.$gallery.find('div.full-image img');
+			this.$container = this.$gallery.find('div.full-image');
+			this.$full_image = this.$container.find('img');
 			this.$next = this.$gallery.find('.gallery-arrow-right');
 			this.$prev = this.$gallery.find('.gallery-arrow-left');
 
 			this.$thumbnails_window = this.$gallery.find('div.thumbnails');
 			this.$thumbnails_body = this.$thumbnails_window.find('.thumbnails-body');
 			this.window_width = this.$thumbnails_window.width();
+			this.container_width = this.$container.width();
 			this.window_left = this.$thumbnails_window.offset().left;
 			this.thumb_width = this.$images.length > 1 ? this.$images.eq(1).offset().left - this.$images.eq(0).offset().left : this.$images.first().width();
 			this.scroll_width = this.$thumbnails_window.get(0).scrollWidth - this.window_width;
@@ -382,11 +384,12 @@ VD.image_gallery = function(url) {
 
 		VD.image_gallery.load_image = function($span) {
 			var data = VD.image_gallery.data;
+			var $image = $span.find('img');
+			var height = $image.data('height') * data.container_width / $image.data('width');
 			data.$images.removeClass('active');
 			$span.addClass('active');
-			$image = $span.find('img');
-			data.$full_image.attr({ src: $image.data('full'), alt: $image.attr('alt') });
 			VD.image_gallery.active_thumb_center();
+			data.$full_image.attr({ src: $image.data('full'), alt: $image.attr('alt') });
 		};
 
 		VD.image_gallery.thumb_click = function(e) {

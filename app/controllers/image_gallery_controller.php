@@ -33,7 +33,8 @@ class image_gallery_controller extends ApplicationController {
 
 	protected function validate_params() {
 		global $params;
-		if (!array_search($params['dir'], ['branding', 'mobile', 'packaging', 'print', 'web'])) {
+		$permited = array('branding', 'mobile', 'packaging', 'print', 'web');
+		if (!in_array($params['dir'], $permited)) {
 			$this->not_found();
 		}
 	}

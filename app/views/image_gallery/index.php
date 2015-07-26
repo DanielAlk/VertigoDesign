@@ -12,7 +12,7 @@
 					<div class="thumbnails-body">
 						<?php foreach($gallery as $filename => $image): ?>
 							<span>
-								<img class="thumb" alt="<?php echo $filename; ?>" src="<?php echo $image['thumb']; ?>" data-size='<?php echo $image['data'][0].'x'.$image['data'][1]; ?>' data-full="<?php echo $image['full']; ?>">
+								<img class="thumb" alt="<?php echo $filename; ?>" src="<?php echo $image['thumb']; ?>" data-width="<?php echo $image['data'][0]; ?>" data-height="<?php echo $image['data'][1]; ?>" data-full="<?php echo $image['full']; ?>">
 							</span>
 						<?php endforeach; ?>
 					</div>
