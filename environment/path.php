@@ -84,21 +84,37 @@ class Path {
 					}
 					//SI PROPIEDADES DEL ARRAY NO FUERON REEMPLAZADAS SE CONVIERTEN A QUERY
 					if (count($arr)) {
+						$route_has_query = true;
 						$route.='?'.http_build_query($arr);
 					}
 				}
 				//SI EN LA URL NO HAY NADA QUE REEMPLAZAR EL ARRAY SE CONVIERTE A QUERY
-				else $route.='?'.http_build_query($arr);
+				else {
+					$route_has_query = true;
+					$route.='?'.http_build_query($arr);
+				};
 			}
 
-			if (isset($arr) && is_string($arr)) $route.=$arr;
+			//SI EL PRIMER ARGUMENTO ES UN STRING SE USA COMO QUERY
+			if (isset($arr) && is_string($arr)) {
+				$route_has_query = true;
+				$route.=$arr;
+			};
 			
 			//CLEAN ROUTE IF PATTERN STILL THERE
 			$route = preg_replace('/{\w+}\//', '', $route);
 			//CLEAN ROUTE IF DOUBLE BAR FOUND
 			$route = preg_replace('/\/\//', '/', $route);
 
-			global $base_url, $host;
+			global $base_url, $host, $app;
+
+			//SET LOCALE TO ROUTE IF LOCATE PARAM PRESENT OR IF SECOND ARGUMENT IS PRESENT TO FORCE A LOCALE
+			$locale_param = $app->settings['locale']['param'];
+			$route_locale = isset($args[1]) ? $args[1] : (isset($_GET[$locale_param]) ? $_GET[$locale_param] : false);
+			if ($route_locale) {
+				if (isset($route_has_query) && $route_has_query) $route.='&'.$locale_param.'='.$route_locale;
+				else $route.='?'.$locale_param.'='.$route_locale;
+			};
 
 			if ($absolute_path) return $host.$base_url.$route;
 			return $base_url.$route;
