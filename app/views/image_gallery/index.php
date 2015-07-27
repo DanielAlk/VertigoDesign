@@ -1,13 +1,12 @@
 <div class="container image-gallery">
 	<div class="image-gallery-content">
-		<a href="#" class="close-gallery">&times;</a>
+		<div class="close-gallery">
+			<a href="#" class="icon-circle-arrow"></a>
+			<h3 class="text-extra-light"><big>Go</big> back to the</h3>
+			<h2 class="text-bold uppercase">main site</h2>
+		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="full-image">
-					<div class="gallery-arrow gallery-arrow-left"></div>
-					<div class="gallery-arrow gallery-arrow-right"></div>
-					<img class="full" alt="" src="">
-				</div>
 				<div class="thumbnails">
 					<div class="thumbnails-body">
 						<?php foreach($gallery as $filename => $image): ?>
@@ -16,6 +15,11 @@
 							</span>
 						<?php endforeach; ?>
 					</div>
+				</div>
+				<div class="full-image">
+					<img class="full" alt="" src="">
+					<div class="gallery-arrow gallery-arrow-left"></div>
+					<div class="gallery-arrow gallery-arrow-right"></div>
 				</div>
 			</div>
 		</div>
