@@ -30,6 +30,9 @@ class App {
 			foreach ($echos as $key => $value) { $$key = $value; }
 			include $file;
 		}
+		function __($var_name) {
+			if (isset($GLOBALS[$var_name])) echo $GLOBALS[$var_name];
+		}
 	}
 
 	# TODO: Review all this logic, add support for messages in redirects (using session ?)
