@@ -8,9 +8,9 @@ class Asset {
 		}
 	}
 	
-	public function path($str) {
+	public function path($str, $type = null) {
 		$arr = explode('.', $str);
-		$ext = end($arr);
+		$ext = $type ? $this->force_types[$type] : end($arr);
 		print $this->assets[$ext][1].$str;
 	}
 	
@@ -43,5 +43,7 @@ class Asset {
 		'ttf' => array('assets/fonts/', 'fonts/'),
 		'svg' => array('assets/fonts/', 'fonts/')
 		);
+
+	private $force_types = array( 'img' => 'jpg', 'js' => 'js', 'css' => 'css', 'font' => 'ttf' );
 }
 ?>
