@@ -12,7 +12,7 @@
 	<script src="<?php $asset->js(); ?>" type="application/javascript"></script>
 	<script>
 		$(function() {
-			<?php if (isset($extra_js)) echo $extra_js; ?>
+			<?php __('extra_js'); ?>
 		});
 	</script>
 	<?php if (isset($log)) echo "<script>console.log(JSON.parse('$log'));</script>"; ?>
