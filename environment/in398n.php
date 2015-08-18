@@ -10,11 +10,16 @@ class in398n {
 
 		$this->l = parse_ini_file('../config/locales/'.$this->language.'.ini', true);
 
+		function current_language() {
+			global $in398n;
+			return $in398n->language;
+		}
+
 		function _l($str) {
-			global $locale;
+			global $in398n;
 			$keys = explode('.', $str);
 			foreach ($keys as $i => $k) {
-				if (!$i) $r = isset($locale->l[$k]) ? $locale->l[$k] : false;
+				if (!$i) $r = isset($in398n->l[$k]) ? $in398n->l[$k] : false;
 				else $r = isset($r[$k]) ? $r[$k] : false;
 			}
 			if (preg_match_all('/\{\{([\w\d\.]+)\}\}/', $r, $matches)) {
@@ -30,11 +35,11 @@ class in398n {
 		};
 
 		function change_locale($lng) {
-			global $locale;
-			$current = preg_replace('/[\?&]?'.$locale->config['param'].'=\w+/', '', $_SERVER['REQUEST_URI']);
-			if ($lng == $locale->config['default']) echo $current;
-			elseif (strpos($current, '?') !== false) echo $current.'&'.$locale->config['param'].'='.$lng;
-			else echo $current.'?'.$locale->config['param'].'='.$lng;
+			global $in398n;
+			$current = preg_replace('/[\?&]?'.$in398n->config['param'].'=\w+/', '', $_SERVER['REQUEST_URI']);
+			if ($lng == $in398n->config['default']) echo $current;
+			elseif (strpos($current, '?') !== false) echo $current.'&'.$in398n->config['param'].'='.$lng;
+			else echo $current.'?'.$in398n->config['param'].'='.$lng;
 		}
 	}
 }
