@@ -110,8 +110,9 @@ class Path {
 
 			//SET LOCALE TO ROUTE IF LOCATE PARAM PRESENT OR IF SECOND ARGUMENT IS PRESENT TO FORCE A LOCALE
 			$locale_param = $app->settings['locale']['param'];
+			$locale_default = $app->settings['locale']['default'];
 			$route_locale = isset($args[1]) ? $args[1] : (isset($_GET[$locale_param]) ? $_GET[$locale_param] : false);
-			if ($route_locale) {
+			if ($route_locale and $route_locale != $locale_default) {
 				if (isset($route_has_query) && $route_has_query) $route.='&'.$locale_param.'='.$route_locale;
 				else $route.='?'.$locale_param.'='.$route_locale;
 			};

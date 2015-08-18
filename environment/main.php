@@ -1,11 +1,11 @@
 <?php
 class Environment {
-	public function __construct($load_database = false) {
+	public function __construct() {
 		set_include_path('../app/');
 		$app_dir = get_include_path();
 		//READ CONFIGURATION AND SETTINGS
 		$settings = parse_ini_file('../config/env.ini', true);
-		$database = $load_database ? $settings['database'] : false;
+		$database = $settings['database'];
 		//SET GLOBALS
 		$GLOBALS['environment'] = $settings['environment'];
 		$GLOBALS['host'] = $settings['host'];
@@ -26,10 +26,10 @@ class Environment {
 		//GET AND SET ENVIRONMENT CLASSES
 		require '../environment/app.php';
 		require '../environment/base.php';
-		require '../environment/locale.php';
+		require '../environment/in398n.php';
 		require '../environment/asset.php';
 		require '../environment/mailer.php';
-		$GLOBALS['locale'] = new Locale;
+		$GLOBALS['in398n'] = new in398n;
 		$GLOBALS['asset'] = new Asset;
 		$GLOBALS['mailer'] = new Mailer($settings['mailer']);
 		//GET AND SET PLUGINS
@@ -51,8 +51,7 @@ class Environment {
 		foreach (glob($dir."*.php") as $filename) {
 			require $filename;
 			$class_name = str_replace(array($dir,'.php'), '', $filename);
-			$var_name = str_replace('_helper', '', $class_name);
-			$GLOBALS[$var_name] = new $class_name;
+			new $class_name;
 		}
 		//GET AND SET CONTROLLERS
 		require 'controllers/application_controller.php';

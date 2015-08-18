@@ -10,7 +10,7 @@
 		</div>
 		<div class="section-bottom">
 			<div class="text-repo">
-				<?php foreach($home->highlight_slides_text as $i => $text): ?>
+				<?php foreach(highlight_slides_text() as $i => $text): ?>
 					<div class="<?php if($i == 0) echo 'active'; ?>">
 						<div class="pull-left" style="<?php if (isset($text['widths'])) echo 'width:'.$text['widths'][0]; ?>">
 							<h4 class="text-extra-light"><?php echo $text['light']; ?></h4>
@@ -37,8 +37,9 @@
 			<h3 class="section-title">Animation</h3>
 			<div class="section-top">
 				<div class="img-repo">
+					<?php $animation_video_ids = animation_video_ids(); ?>
 					<?php foreach ($animation_images as $i => $img_path): ?>
-						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img_path; ?>" data-video-id="<?php echo $home->animation_video_ids[$i]; ?>">
+						<img class="<?php if($i == 0) echo 'active'; ?>" src="<?php echo $img_path; ?>" data-video-id="<?php echo $animation_video_ids[$i]; ?>">
 					<?php endforeach; ?>
 				</div>
 			</div>

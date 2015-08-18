@@ -1,14 +1,10 @@
 <?php
 class ActiveBase {
-	protected $pdo;
+	private $data;
+	protected $pdo = null;
 
-	public function __construct($data) {
-		if (!isset($data) || $data === false) return false;
-		$class_route = explode('\\', get_class($this));
-		$class_name = end($class_route);
-		if ($class_name == 'ActiveBase') return;
-		$model_name = str_replace('_model', '', $class_name);
-		$this->table = strtolower($model_name).'s';
+	private function connect() {
+		$data = $this->data;
 		$this->pdo = new PDO(
 			'mysql:host='.$data['host'].';
 			dbname='.$data['dbname'].';
@@ -18,10 +14,29 @@ class ActiveBase {
 			);
 	}
 
+	private function prepare($sql) {
+		if ($this->pdo === null) $this->connect();
+		return $this->pdo->prepare($sql);
+	}
+
+	public function __construct($data) {
+		if (!isset($data) || $data === false) return false;
+		$class_route = explode('\\', get_class($this));
+		$class_name = end($class_route);
+		if ($class_name == 'ActiveBase') return;
+		$model_name = str_replace('_model', '', $class_name);
+		$this->table = strtolower($model_name);
+		$this->data = $data;
+	}
+
+	public function __destruct() {
+		$this->pdo = null;
+	}
+
 	public function truncate() {
 		$table = $this->table;
 		$sql = "TRUNCATE TABLE $table";
-		$pdo = $this->pdo->prepare($sql);
+		$pdo = $this->prepare($sql);
 		@$pdo->execute() or $error;
 		if(isset($error)) return 'error';
 		return 'done';
@@ -30,7 +45,7 @@ class ActiveBase {
 	public function next_id() {
 		$table = $this->table;
 		$sql = "SHOW TABLE STATUS LIKE ?";
-		$pdo = $this->pdo->prepare($sql);
+		$pdo = $this->prepare($sql);
 		$pdo->execute(array($table));
 		return $pdo->fetch(PDO::FETCH_OBJ)->Auto_increment;
 	}
@@ -39,7 +54,7 @@ class ActiveBase {
 		if (isset($id)) {
 			$table = $this->table;
 			$sql = "SELECT * FROM $table WHERE id = ?";
-			$pdo = $this->pdo->prepare($sql);
+			$pdo = $this->prepare($sql);
 			$pdo->execute(array($id));
 			return $pdo->fetch(PDO::FETCH_OBJ);
 		}
@@ -55,7 +70,7 @@ class ActiveBase {
 		foreach($arr as $key => $val) {
 			$pdoArr[':'.$key] = $val;
 		}
-		$pdo = $this->pdo->prepare($sql);
+		$pdo = $this->prepare($sql);
 		$pdo->execute($pdoArr);
 		return $this->pdo->lastInsertId();
 	}
@@ -75,7 +90,7 @@ class ActiveBase {
 			$pdoArr[':'.$key] = $val;
 		}
 		$pdoArr[':id'] = $id;
-		$pdo = $this->pdo->prepare($sql);
+		$pdo = $this->prepare($sql);
 		$pdo->execute($pdoArr);
 		return $id;
 	}
@@ -83,7 +98,7 @@ class ActiveBase {
 	public function delete($id) {
 		$table = $this->table;
 		$sql = "DELETE FROM $table WHERE id = ?";
-		$pdo = $this->pdo->prepare($sql);
+		$pdo = $this->prepare($sql);
 		$pdo->execute(array($id));
 	}
 
@@ -91,7 +106,7 @@ class ActiveBase {
 		$table = $this->table;
 		$sql = "SELECT * FROM $table";
 		if ($str) $sql.= ' '.$str;
-		$pdo = $this->pdo->prepare($sql);
+		$pdo = $this->prepare($sql);
 		$pdo->execute($arr);
 		return $pdo->fetchAll(PDO::FETCH_OBJ);
 	}
