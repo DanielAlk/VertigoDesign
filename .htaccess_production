@@ -1,0 +1,24 @@
+RewriteEngine on
+
+# BASE_URL: CHANGE THIS LINE TO MATCH BASE_URL FOR ENVIRONMENT IN env.ini
+RewriteBase /public/
+
+# SET RULES FOR ASSETS
+RewriteRule ^css/([\w\.\-\_\/]+).css$ css/main.php?asset=$1 [QSA,L]
+RewriteRule ^js/([\w\.\-\_\/]+).js$ js/main.php?asset=$1 [QSA,L]
+RewriteRule ^img/([\w\.\-\_\/]+)$ /app/assets/img/$1 [QSA,L]
+RewriteRule ^fonts/([\w\.\-\_\/]+)$ /app/assets/fonts/$1 [QSA,L]
+
+# DEFAULT RULES
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?path=$1 [QSA,L]
+
+# DEFLATE COMPRESSION
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/javascript
+
+<FilesMatch "\.(gif|jpe?g|png|ico|eot|svg|ttf|woff)$">
+	Header set Cache-Control "public, max-age=31536000"
+</FilesMatch>
