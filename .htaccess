@@ -1,7 +1,7 @@
 RewriteEngine on
 
 # BASE_URL: CHANGE THIS LINE TO MATCH BASE_URL FOR ENVIRONMENT IN env.ini
-RewriteBase /vertigo/public/ 
+RewriteBase /vertigo/public/
 
 # SET RULES FOR ASSETS
 RewriteRule ^css/([\w\.\-\_\/]+).css$ css/main.php?asset=$1 [QSA,L]
