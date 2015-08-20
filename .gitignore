@@ -1,7 +1,6 @@
 # Config Files
 /config/env.ini
 /config/env_production.ini
-/config/env_testing.ini
 
 # Mac finder artifacts
 .DS_Store
