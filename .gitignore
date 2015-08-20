@@ -1,6 +1,7 @@
 # Config Files
 /config/env.ini
 /config/env_production.ini
+/.htaccess
 
 # Mac finder artifacts
 .DS_Store
