@@ -4,5 +4,8 @@
 
 .htaccess
 
+# megashows
+/ms/*
+
 # Mac finder artifacts
 .DS_Store
